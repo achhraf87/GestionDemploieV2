@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Model1StoreContainer">
+    <EntitySet Name="Filieres" EntityType="Model1.Store.Filieres" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Groupes" EntityType="Model1.Store.Groupes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Formateurs" EntityType="Model1.Store.Formateurs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Salles" EntityType="Model1.Store.Salles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Modules" EntityType="Model1.Store.Modules" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="emploies" EntityType="Model1.Store.emploies" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="Lier" Association="Model1.Store.Lier">
+      <End Role="Formateur" EntitySet="Formateurs" />
+      <End Role="Salle" EntitySet="Salles" />
+    </AssociationSet>
+    <AssociationSet Name="Enseigne" Association="Model1.Store.Enseigne">
+      <End Role="Formateur" EntitySet="Formateurs" />
+      <End Role="Module" EntitySet="Modules" />
+    </AssociationSet>
+    <AssociationSet Name="Avoir" Association="Model1.Store.Avoir">
+      <End Role="Formateur" EntitySet="Formateurs" />
+      <End Role="emploie" EntitySet="emploies" />
+    </AssociationSet>
+    <AssociationSet Name="Integrer" Association="Model1.Store.Integrer">
+      <End Role="Formateur" EntitySet="Formateurs" />
+      <End Role="Groupe" EntitySet="Groupes" />
+    </AssociationSet>
+    <AssociationSet Name="Attacher" Association="Model1.Store.Attacher">
+      <End Role="emploie" EntitySet="emploies" />
+      <End Role="Module" EntitySet="Modules" />
+    </AssociationSet>
+    <AssociationSet Name="Associer" Association="Model1.Store.Associer">
+      <End Role="emploie" EntitySet="emploies" />
+      <End Role="Groupe" EntitySet="Groupes" />
+    </AssociationSet>
+    <AssociationSet Name="Etudier" Association="Model1.Store.Etudier">
+      <End Role="Module" EntitySet="Modules" />
+      <End Role="Salle" EntitySet="Salles" />
+    </AssociationSet>
+    <AssociationSet Name="Appartient" Association="Model1.Store.Appartient">
+      <End Role="Filiere" EntitySet="Filieres" />
+      <End Role="Groupe" EntitySet="Groupes" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Filieres">
+    <Key>
+      <PropertyRef Name="idFiliere" />
+    </Key>
+    <Property Name="idFiliere" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NomFiliere" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Groupes">
+    <Key>
+      <PropertyRef Name="idGroupe" />
+    </Key>
+    <Property Name="idGroupe" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NomGroupe" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Filiere_idFiliere" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Formateurs">
+    <Key>
+      <PropertyRef Name="idFormateur" />
+    </Key>
+    <Property Name="idFormateur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NomFormateur" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Groupe_idGroupe" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Salles">
+    <Key>
+      <PropertyRef Name="idSalle" />
+    </Key>
+    <Property Name="idSalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NomSalle" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Formateur_idFormateur" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Modules">
+    <Key>
+      <PropertyRef Name="idModule" />
+    </Key>
+    <Property Name="idModule" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NomModule" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="dureeModule" Type="int" Nullable="false" />
+    <Property Name="Formateur_idFormateur" Type="int" Nullable="false" />
+    <Property Name="Salle_idSalle" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="emploies">
+    <Key>
+      <PropertyRef Name="idEmploie" />
+    </Key>
+    <Property Name="idEmploie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Jours" Type="datetime" Nullable="false" />
+    <Property Name="Heure_Debut" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Heure_Fin" Type="time" Nullable="false" />
+    <Property Name="Formateur_idFormateur" Type="int" Nullable="false" />
+    <Property Name="Module_idModule" Type="int" Nullable="false" />
+    <Property Name="Groupe_idGroupe" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="Lier">
+    <End Role="Formateur" Type="Model1.Store.Formateurs" Multiplicity="1" />
+    <End Role="Salle" Type="Model1.Store.Salles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Formateur">
+        <PropertyRef Name="idFormateur" />
+      </Principal>
+      <Dependent Role="Salle">
+        <PropertyRef Name="Formateur_idFormateur" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Enseigne">
+    <End Role="Formateur" Type="Model1.Store.Formateurs" Multiplicity="1" />
+    <End Role="Module" Type="Model1.Store.Modules" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Formateur">
+        <PropertyRef Name="idFormateur" />
+      </Principal>
+      <Dependent Role="Module">
+        <PropertyRef Name="Formateur_idFormateur" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Avoir">
+    <End Role="Formateur" Type="Model1.Store.Formateurs" Multiplicity="1" />
+    <End Role="emploie" Type="Model1.Store.emploies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Formateur">
+        <PropertyRef Name="idFormateur" />
+      </Principal>
+      <Dependent Role="emploie">
+        <PropertyRef Name="Formateur_idFormateur" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Integrer">
+    <End Role="Formateur" Type="Model1.Store.Formateurs" Multiplicity="*" />
+    <End Role="Groupe" Type="Model1.Store.Groupes" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Groupe">
+        <PropertyRef Name="idGroupe" />
+      </Principal>
+      <Dependent Role="Formateur">
+        <PropertyRef Name="Groupe_idGroupe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Attacher">
+    <End Role="emploie" Type="Model1.Store.emploies" Multiplicity="*" />
+    <End Role="Module" Type="Model1.Store.Modules" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Module">
+        <PropertyRef Name="idModule" />
+      </Principal>
+      <Dependent Role="emploie">
+        <PropertyRef Name="Module_idModule" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Associer">
+    <End Role="emploie" Type="Model1.Store.emploies" Multiplicity="*" />
+    <End Role="Groupe" Type="Model1.Store.Groupes" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Groupe">
+        <PropertyRef Name="idGroupe" />
+      </Principal>
+      <Dependent Role="emploie">
+        <PropertyRef Name="Groupe_idGroupe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Etudier">
+    <End Role="Module" Type="Model1.Store.Modules" Multiplicity="*" />
+    <End Role="Salle" Type="Model1.Store.Salles" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Salle">
+        <PropertyRef Name="idSalle" />
+      </Principal>
+      <Dependent Role="Module">
+        <PropertyRef Name="Salle_idSalle" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Appartient">
+    <End Role="Filiere" Type="Model1.Store.Filieres" Multiplicity="1" />
+    <End Role="Groupe" Type="Model1.Store.Groupes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Filiere">
+        <PropertyRef Name="idFiliere" />
+      </Principal>
+      <Dependent Role="Groupe">
+        <PropertyRef Name="Filiere_idFiliere" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

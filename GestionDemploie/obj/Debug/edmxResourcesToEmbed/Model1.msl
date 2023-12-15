@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="Model1Container">
+    <EntitySetMapping Name="Filieres">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Filiere)">
+        <MappingFragment StoreEntitySet="Filieres">
+          <ScalarProperty Name="idFiliere" ColumnName="idFiliere" />
+          <ScalarProperty Name="NomFiliere" ColumnName="NomFiliere" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Groupes">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Groupe)">
+        <MappingFragment StoreEntitySet="Groupes">
+          <ScalarProperty Name="idGroupe" ColumnName="idGroupe" />
+          <ScalarProperty Name="NomGroupe" ColumnName="NomGroupe" />
+          <ScalarProperty Name="Filiere_idFiliere" ColumnName="Filiere_idFiliere" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Formateurs">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Formateur)">
+        <MappingFragment StoreEntitySet="Formateurs">
+          <ScalarProperty Name="idFormateur" ColumnName="idFormateur" />
+          <ScalarProperty Name="NomFormateur" ColumnName="NomFormateur" />
+          <ScalarProperty Name="Groupe_idGroupe" ColumnName="Groupe_idGroupe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Salles">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Salle)">
+        <MappingFragment StoreEntitySet="Salles">
+          <ScalarProperty Name="idSalle" ColumnName="idSalle" />
+          <ScalarProperty Name="NomSalle" ColumnName="NomSalle" />
+          <ScalarProperty Name="Formateur_idFormateur" ColumnName="Formateur_idFormateur" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Modules">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Module)">
+        <MappingFragment StoreEntitySet="Modules">
+          <ScalarProperty Name="idModule" ColumnName="idModule" />
+          <ScalarProperty Name="NomModule" ColumnName="NomModule" />
+          <ScalarProperty Name="dureeModule" ColumnName="dureeModule" />
+          <ScalarProperty Name="Formateur_idFormateur" ColumnName="Formateur_idFormateur" />
+          <ScalarProperty Name="Salle_idSalle" ColumnName="Salle_idSalle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="emploies">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.emploie)">
+        <MappingFragment StoreEntitySet="emploies">
+          <ScalarProperty Name="idEmploie" ColumnName="idEmploie" />
+          <ScalarProperty Name="Jours" ColumnName="Jours" />
+          <ScalarProperty Name="Heure_Debut" ColumnName="Heure_Debut" />
+          <ScalarProperty Name="Heure_Fin" ColumnName="Heure_Fin" />
+          <ScalarProperty Name="Formateur_idFormateur" ColumnName="Formateur_idFormateur" />
+          <ScalarProperty Name="Module_idModule" ColumnName="Module_idModule" />
+          <ScalarProperty Name="Groupe_idGroupe" ColumnName="Groupe_idGroupe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

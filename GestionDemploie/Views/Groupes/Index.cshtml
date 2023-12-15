@@ -1,0 +1,178 @@
+﻿@model IEnumerable<GestionDemploie.Groupe>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="row">
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Total Filières
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.totalCount</div>
+                    </div>
+                    <div class="col-auto">
+                        <h1><i class="fa-solid fa-landmark fa-beat-fade fa-xs"></i> </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            Groupes (Total)
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.groupe</div>
+                    </div>
+                    <div class="col-auto">
+                        <h2> <i class="fa-solid fa-users fa-fade fa-xs"></i> </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="d-flex">
+    <div class="ml-auto p-2">
+        <a href="~/Groupes/Create" class="btn btn-primary btn-sm">Ajouter Un Groupe</a>
+    </div>
+</div>
+
+<br />
+
+<div class="card shadow mb-4">
+    <!-- Card Header - Accordion -->
+    <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse"
+       role="button" aria-expanded="true" aria-controls="collapseCardExample">
+        <h6 class="m-0 font-weight-bold text-primary">Les groupes</h6>
+    </a>
+    <!-- Card Content - Collapse -->
+    <div class="collapse show" id="collapseCardExample">
+        <div class="card-body">
+
+            <table class="table">
+                <tr>
+                    <th>
+                        Le groupe
+                        @*@Html.DisplayNameFor(model => model.NomGroupe)*@
+                    </th>
+                    <th>
+                        La filiére
+                        @*@Html.DisplayNameFor(model => model.Filiere.NomFiliere)*@
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NomGroupe)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Filiere.NomFiliere)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.idGroupe }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.idGroupe }) |
+                            
+                            @Html.ActionLink("Delete", "Delete", new { id = item.idGroupe })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<style>
+
+    .text-center {
+        text-align: center;
+    }
+
+    .d-none {
+        display: none !important;
+    }
+
+    .d-md-inline {
+        display: inline !important;
+    }
+
+    .rounded-circle {
+        border-radius: 50%;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .d-none {
+        display: none !important;
+    }
+
+    .d-md-inline {
+        display: inline !important;
+    }
+
+    .rounded-circle {
+        border-radius: 50%;
+    }
+
+
+    .table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+        .table th, .table td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+            color: #444;
+        }
+
+        .table tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .table td:last-child {
+            text-align: center;
+        }
+
+            .table td:last-child a {
+                color: #007bff;
+                text-decoration: none;
+            }
+
+                .table td:last-child a:hover {
+                    color: #0056b3;
+                    text-decoration: underline;
+                }
+</style>
+
+
